@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101027" />
+    <title>ChordLens — play any song, your way</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">⌁</span>ChordLens</a>
+        <div class="status"><span class="status-dot"></span><span id="trackStatus">Demo session</span></div>
+        <button class="icon-button" id="themeButton" aria-label="Toggle glow">✦</button>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">PRACTICE, MADE PERSONAL</p>
+          <h1>Find your place in<br /><em>every song.</em></h1>
+          <p class="subtitle">Upload a track, choose your instrument, and play along with a responsive chord sheet.</p>
+        </div>
+        <label class="upload-card" for="fileInput">
+          <input id="fileInput" type="file" accept="audio/mpeg,audio/mp3,audio/*" hidden />
+          <span class="upload-icon">↥</span>
+          <span><strong>Drop in an MP3</strong><small>or choose a file from your device</small></span>
+          <span class="upload-badge">LOCAL ONLY</span>
+        </label>
+      </section>
+
+      <section class="control-panel glass">
+        <div class="now-playing">
+          <div class="cover"><span>CL</span></div>
+          <div><p class="label">NOW PLAYING</p><h2 id="trackTitle">Golden Hour</h2><p id="trackArtist">ChordLens demo arrangement</p></div>
+        </div>
+        <div class="transport">
+          <div class="wave-wrap"><canvas id="waveform" aria-label="Audio waveform"></canvas><input id="seek" type="range" min="0" max="100" value="0" aria-label="Seek track" /></div>
+          <div class="player-controls"><span id="currentTime">0:00</span><button id="playButton" class="play-button" aria-label="Play">▶</button><span id="duration">0:32</span></div>
+        </div>
+        <audio id="audio"></audio>
+      </section>
+
+      <section class="workspace">
+        <aside class="sidebar glass">
+          <div class="section-head"><p class="label">YOUR INSTRUMENT</p><span>01</span></div>
+          <div class="instrument-switch" role="group" aria-label="Choose instrument">
+            <button class="instrument active" data-instrument="guitar"><span>⌇</span>Guitar</button>
+            <button class="instrument" data-instrument="piano"><span>♩</span>Piano</button>
+            <button class="instrument" data-instrument="ukulele"><span>⌇</span>Ukulele</button>
+          </div>
+          <div class="sidebar-rule"></div>
+          <div class="section-head"><p class="label">KEY & TRANSPOSE</p><span id="keyDisplay">G MAJOR</span></div>
+          <div class="transpose-row"><button id="downButton" aria-label="Transpose down">−</button><div class="key-value" id="transposeValue">0 <small>semitones</small></div><button id="upButton" aria-label="Transpose up">+</button></div>
+          <button class="reset-button" id="resetButton">↺ Reset original key</button>
+          <div class="tip"><span>✦</span><p><strong>Practice tip</strong>Slow the track down in your music app, then use this sheet to lock in transitions.</p></div>
+        </aside>
+
+        <section class="song-sheet glass">
+          <div class="sheet-header"><div><p class="label">INTERACTIVE CHORD SHEET</p><h2>Golden Hour <span>•</span> G major</h2></div><div class="progress-pill"><span class="status-dot"></span><span id="lineCounter">LINE 1 / 8</span></div></div>
+          <div id="lyrics" class="lyrics" aria-live="polite"></div>
+          <div class="sheet-footer"><span>Tap a chord to preview its shape</span><span>Space to play / pause</span></div>
+        </section>
+
+        <aside class="chord-card glass">
+          <p class="label">PLAYING NOW</p>
+          <div class="chord-name" id="chordName">G</div>
+          <p class="chord-description" id="chordDescription">Open and bright. Let every string ring.</p>
+          <div id="diagram" class="diagram"></div>
+          <div class="card-footer"><span id="diagramInstrument">GUITAR SHAPE</span><button id="nextChord" aria-label="Next chord">→</button></div>
+        </aside>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
+
